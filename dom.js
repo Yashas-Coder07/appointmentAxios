@@ -98,8 +98,11 @@ function displayUser(user) {
     li.appendChild(editButton);
 
     userDisplay.appendChild(li);
+    const id = user._id;
 
-
+    delButton.addEventListener('click', () => {
+        deleteUser(id, li);
+    });
 
 }
 
@@ -112,3 +115,12 @@ function setIntemToEdit(item) {
 }
 
 
+
+function deleteUser(id, li) {
+
+    axios
+        .delete(`https://crudcrud.com/api/58cd3421a6d648ddb55783592f5c45fe/saveData/${id}`)
+        .then((res) => li.remove())
+        .catch((err) => console.log(err))
+
+}
