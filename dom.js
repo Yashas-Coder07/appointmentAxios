@@ -60,7 +60,7 @@ form.addEventListener("submit", (e) => {
 
     })
     axios
-        .post("https://crudcrud.com/api/58cd3421a6d648ddb55783592f5c45fe/saveData", {
+        .post("https://crudcrud.com/api/e1631473c02f4bdc96288b7e1764b2f4/AppointmentData", {
             name: name1.value,
             mail: mail.value,
             number: number.value
@@ -74,7 +74,7 @@ form.addEventListener("submit", (e) => {
 });
 
 window.addEventListener("DOMContentLoaded", () => {
-    axios.get("https://crudcrud.com/api/58cd3421a6d648ddb55783592f5c45fe/saveData")
+    axios.get("https://crudcrud.com/api/e1631473c02f4bdc96288b7e1764b2f4/AppointmentData")
         .then((res) => {
 
             for (let i = 0; i < res.data.length; i++) {
@@ -104,6 +104,25 @@ function displayUser(user) {
         deleteUser(id, li);
     });
 
+    editButton.addEventListener('click', () => {
+
+        name1.value = user.name,
+            mail.value = user.mail,
+            number.value = user.number
+
+
+        axios.put(`https://crudcrud.com/api/e1631473c02f4bdc96288b7e1764b2f4/AppointmentData/${id}`, {
+            name: name1.value,
+            mail: mail.value,
+            number: number.value,
+
+        })
+            .then((res) => {
+                deleteUser(id, li);
+            })
+            .catch((err) => console.log(err));
+    })
+
 }
 
 function setIntemToEdit(item) {
@@ -119,8 +138,9 @@ function setIntemToEdit(item) {
 function deleteUser(id, li) {
 
     axios
-        .delete(`https://crudcrud.com/api/58cd3421a6d648ddb55783592f5c45fe/saveData/${id}`)
+        .delete(`https://crudcrud.com/api/e1631473c02f4bdc96288b7e1764b2f4/AppointmentData/${id}`)
         .then((res) => li.remove())
         .catch((err) => console.log(err))
 
 }
+
