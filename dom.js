@@ -73,6 +73,17 @@ form.addEventListener("submit", (e) => {
     form.reset();
 });
 
+window.addEventListener("DOMContentLoaded", () => {
+    axios.get("https://crudcrud.com/api/58cd3421a6d648ddb55783592f5c45fe/saveData")
+        .then((res) => {
+
+            for (let i = 0; i < res.data.length; i++) {
+
+                displayUser(res.data[i]);
+            }
+        })
+        .catch((err) => console.log(err))
+})
 
 function displayUser(user) {
 
